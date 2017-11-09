@@ -28,7 +28,7 @@ body {
 			this.load.crossOrigin = 'anonymous';
 			
 			//Preloading sounds
-			game.load.audio('bgm', ['audio/bgm.mp3', 'audio/bgm.ogg']);
+			game.load.audio('boden', ['audio/bgm.mp3','audio/bgm.ogg']);
 			game.load.audio('jump', 'audio/jump.wav');
 			game.load.audio('kill', 'audio/stomp.wav');
 			game.load.audio('click', 'audio/coin.wav');
@@ -53,7 +53,7 @@ body {
 
 		function create() {
 
-			music = game.add.audio('bmg');
+			music = game.add.audio('boden');
 			music.play('', 0, 1, true);
 
 			Phaser.Canvas.setImageRenderingCrisp(game.canvas)
