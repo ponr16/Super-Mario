@@ -29,9 +29,9 @@ body {
 			
 			//Preloading sounds
 			game.load.audio('boden', ['audio/bgm.mp3','audio/bgm.ogg']);
-			game.load.audio('jump', 'audio/jump.wav');
-			game.load.audio('kill', 'audio/stomp.wav');
-			game.load.audio('click', 'audio/coin.wav');
+			game.load.audio('jump', ['audio/jump.wav']);
+			game.load.audio('kill', ['audio/stomp.wav']);
+			game.load.audio('click', ['audio/coin.wav']);
 			game.load.audio('death', ['audio/dead.mp3','audio/dead.ogg']);
 
 			this.load.spritesheet('tiles', 'assets/super_mario_tiles.png', 16,
@@ -169,7 +169,7 @@ body {
 			} else {
 
 				music.stop();
-				deathsnd = game.add.audio('dead');
+				deathsnd = game.add.audio('death');
 				deathsnd.play();
 
 				player.frame = 6;
