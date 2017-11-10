@@ -205,6 +205,9 @@ body {
 					goomba.kill();
 				});
 			} else {
+				
+				l -= 1;
+				localStorage.setItem('lives', l);
 
 				music.stop();
 				deathsnd = game.add.audio('death');
