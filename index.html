@@ -43,7 +43,15 @@ body {
 			this.load.tilemap('level', 'assets/super_mario_map.json', null,
 					Phaser.Tilemap.TILED_JSON);
 		}
-
+		
+		//Lives and score
+		localStorage.setItem('lives', 3);
+		var lp;
+		var l;
+		
+		var sp;
+		var s;
+		
 		//Variables
 		var music;
 		var jumpsnd;
@@ -55,7 +63,27 @@ body {
 
 			music = game.add.audio('boden');
 			music.play('', 0, 1, true);
-
+			
+			lp = game.add.text( 5, 10, '3', {
+				font: '18px arial',
+				fill: '#ffffff',
+				aligment: 'center',
+				stroke: '#000000',
+				strokeThickness : 1
+			});
+			lp..fixedToCamera = true;
+			l = parseInt(localStorage.getItem("lives"));
+			
+			sp = game.add.text( 170, 10, '3', {
+				font: '18px arial',
+				fill: '#ffffff',
+				aligment: 'center',
+				stroke: '#000000',
+				strokeThickness : 1
+			});
+			sp..fixedToCamera = true;
+			s = 0;
+			
 			Phaser.Canvas.setImageRenderingCrisp(game.canvas)
 			game.scale.pageAlignHorizontally = true;
 			game.scale.pageAlignVertically = true
@@ -104,6 +132,12 @@ body {
 		}
 
 		function update() {
+			sp.text = "Score : " + s;
+			game.world.bringToTop(sp);
+			
+			lp.text = "Score : " + l;
+			game.world.bringToTop(lp);
+			
 			game.physics.arcade.collide(player, layer);
 			game.physics.arcade.collide(goombas, layer);
 			game.physics.arcade.overlap(player, goombas, goombaOverlap);
@@ -149,7 +183,9 @@ body {
 
 			coinsnd = game.add.audio('click');
 			coinsnd.play();
-
+			
+			s += 10;
+			
 			coin.kill();
 		}
 
@@ -158,7 +194,9 @@ body {
 
 				stompsnd = game.add.audio('kill');
 				stompsnd.play();
-
+				
+				s += 25;
+				
 				goomba.animations.stop();
 				goomba.frame = 2;
 				goomba.body.enable = false;
@@ -176,8 +214,12 @@ body {
 				player.body.enable = false;
 				player.animations.stop();
 				game.time.events.add(Phaser.Timer.SECOND * 3, function() {
+				if(l > 0){
+					this.game.state.restart();
+				}else if(l == 0){
 					game.paused = true;
-				});
+				}
+			});;
 			}
 		}
 	</script>
